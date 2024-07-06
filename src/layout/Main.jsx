@@ -10,7 +10,7 @@ class Main extends React.Component {
 	};
 
 	componentDidMount() {
-		fetch(`http://www.omdbapi.com/?apikey=${API_KEY}&s=matrix`)
+		fetch(`https://www.omdbapi.com/?apikey=${API_KEY}&s=matrix`)
 			.then(response => response.json())
 			.then(data => {
 				if (data.Search) {
@@ -18,12 +18,15 @@ class Main extends React.Component {
 				} else {
 					this.setState({ movies: [] });
 				}
+			})
+			.catch(err => {
+				console.error(err);
 			});
 	}
 
 	searchMovies = (str, type = 'all') => {
 		fetch(
-			`http://www.omdbapi.com/?apikey=${API_KEY}&s=${str}${
+			`https://www.omdbapi.com/?apikey=${API_KEY}&s=${str}${
 				type !== 'all' ? `&type=${type}` : ''
 			}`
 		)
@@ -34,6 +37,9 @@ class Main extends React.Component {
 				} else {
 					this.setState({ movies: [] });
 				}
+			})
+			.catch(err => {
+				console.error(err);
 			});
 	};
 
